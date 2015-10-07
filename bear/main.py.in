@@ -210,9 +210,9 @@ def shell_escape(command):
         """ Do protect argument if that's needed. """
 
         table = {'\\': '\\\\', '"': '\\"'}
-        escaped = ''.join([table.get(c, c) for c in arg])
+        do_escape = lambda x: ''.join([table.get(c, c) for c in x])
 
-        return '"' + escaped + '"' if needs_quote(arg) else escaped
+        return '"' + do_escape(arg) + '"' if needs_quote(arg) else arg
 
     return " ".join([escape(arg) for arg in command])
 
